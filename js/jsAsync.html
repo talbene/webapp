@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 24px;
+        color: #004990;
+        margin: 100px auto;
+    }
+
+    img {
+        cursor: pointer;
+    }
+
+    div{
+        text-align: center;
+    }
+
+</style>
+
+<div>
+    <span id="h">--</span>:
+    <span id="m">--</span>:
+    <span id="s">--</span>
+</div>
+
+<div>
+    <img src="http://png-1.findicons.com/files/icons/1035/human_o2/32/media_playback_start.png"
+         onclick="myClock.startClock()">
+    &nbsp;&nbsp;&nbsp;
+    <img src="http://png-2.findicons.com/files/icons/2166/oxygen/32/media_playback_stop.png"
+         onclick="myClock.stopClock()">
+</div>
+
+<script>
+    /**
+     ** implement a simple clock using the setInterval
+     **/
+
+    var myClock = (function() {
+
+        // The timer reference
+
+        var
+            clockId,
+            domNodes;
+
+        /* Start the ticking...
+//        function startClock() {
+        *    if(!clockId) {
+                clockId = setTimeout(updateClock, 1000);
+            }
+        }*/
+
+        /** Stop the ticker */
+        function stopClock() {
+            clearTimeout(clockId);
+            clockId = undefined;
+        }
+
+        /** Flush the ticker on screen */
+        function updateClock() {
+            console.log("update");
+
+            var currentTime = new Date();
+
+            // Get the current Time
+            domNodes[0].innerHTML = currentTime.getHours();
+            domNodes[1].innerHTML = currentTime.getMinutes();
+            domNodes[2].innerHTML = currentTime.getSeconds();
+
+            clearTimeout(clockId);
+            // this way the clock continue to run ..just when the function end
+            clockId = setTimeout(updateClock, 900);
+
+
+        }
+
+        // The init
+        function init() {
+
+            // cache domNodes
+            if (!domNodes) {
+                domNodes = [];
+                domNodes.push(document.querySelector('#h'));
+                domNodes.push(document.querySelector('#m'));
+                domNodes.push(document.querySelector('#s'));
+            }
+
+        }
+
+        init();
+
+        return {
+            //startClock: startClock,
+            stopClock: stopClock
+        };
+
+    })();
+
+    myClock.updateClock();
+
+</script>
+
+</body>
+</html>
