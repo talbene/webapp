@@ -43,7 +43,7 @@ var tabModule = {
 
     init: function () {
         this.initEvent();
-        this.tabNav();
+        //this.tabNav();
     },
 
     tabNav: function () {
@@ -81,8 +81,8 @@ var tabModule = {
 
 
     initEvent: function () {
-        UTILS.addEvent(window,"hashchange", this.tabNav());//????
-       //UTILS.addEvent(document.querySelector('#tabs a'),'click', this.tabNav());
+        UTILS.addEvent(window,"hashchange", this.tabNav);//????
+      //  UTILS.addEvent(document.querySelector('#tabs a'),'click', this.tabNav);
     }
 
 };
@@ -92,8 +92,6 @@ var formModule = {
 
     init: function () {
         this.initEvent();
-        this.fromLocalStorage();
-
     },
 
     toLocalStorage: function(){
@@ -120,7 +118,7 @@ var formModule = {
           for (var i = 0; i < captureValue.length; i++) {
              // storage[captureValue[i]] = urlValue[i];
               //localStorage['data']= data[i];
-               data[i] = ([captureValue[i], urlValue[i]])
+              data[i] = ([captureValue[i], urlValue[i]])
               localStorage.setItem("data" , JSON.stringify(data))
           }
 
@@ -133,15 +131,30 @@ var formModule = {
 
     fromLocalStorage: function() {
         if(localStorage.length>0){
-        var dataStorage = JSON.parse(localStorage.getItem('data'))//??? get the previous data;
-            alert(dataStorage);
+        var dataStorage = JSON.parse(localStorage.getItem('data'))
+        //    console.log(dataStorage[0][0]);
+
+            for (var i = 0; i < dataStorage.length; i++) {
+
+             //   console.log(dataStorage[i][i]);
+
+                for (var z = 0; z < dataStorage[i].length; z++) {
+
+                      if(z%2 ===0)
+
+                             {console.log(dataStorage[i][z])}
+                      else
+                             {console.log("odd:" + dataStorage[i][z])}
+                }
+            }
+
         }
     },
 
     initEvent: function () {
-       UTILS.addEvent(document.querySelector('#saveBtn'),'click', this.toLocalStorage);
-        //UTILS.addEvent(window, 'click', this.toLocalStorage())
-       UTILS.addEvent(document.querySelector('#clearBtn'),'click', this.clearLocalStorage);
+        UTILS.addEvent(document.querySelector('#saveBtn'),'click', this.toLocalStorage);
+        UTILS.addEvent(document.querySelector('#saveBtn'),'click', this.fromLocalStorage);
+        UTILS.addEvent(document.querySelector('#clearBtn'),'click', this.clearLocalStorage);
     }
 
 };
