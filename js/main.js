@@ -23,27 +23,16 @@ function init()  {
 
 
 
-//iframe
-var elementList = document.querySelector(".link");
-//console.log(elementList);
-elementList.addEventListener("change", select, false);
 
-function select(e) {
-    e.preventDefault();
-    var target = e.target.value;
-    var frame = document.querySelector("iframe");
-    frame.setAttribute("src", target);
-}
 
 //tabs
-
 
 
 var tabModule = {
 
     init: function () {
         this.initEvent();
-        //this.tabNav();
+        //this.toIframe();
     },
 
     tabNav: function () {
@@ -71,12 +60,6 @@ var tabModule = {
                 window.location.hash = $(this).attr("href");
                 document.body.scrollTop = yScroll;
             });
-
-
-
-
-
-
     },
 
 
@@ -92,6 +75,7 @@ var formModule = {
 
     init: function () {
         this.initEvent();
+        this.toIframe();
     },
 
     toLocalStorage: function(){
@@ -138,23 +122,49 @@ var formModule = {
 
              //   console.log(dataStorage[i][i]);
 
-                for (var z = 0; z < dataStorage[i].length; z++) {
+                for (var j = 0; j < dataStorage[i].length; j++) {
 
-                      if(z%2 ===0)
+                    var elementList = document.querySelector(".link");
 
-                             {console.log(dataStorage[i][z])}
+                      if(j % 2 === 0)
+
+                             {
+                                 elementList[i].innerHTML = dataStorage[i][j]
+                                 console.log("inner:"+elementList[i].innerHTML)
+                             }
                       else
-                             {console.log("odd:" + dataStorage[i][z])}
+                             {
+                                 elementList[i].value = dataStorage[i][j]
+                                 console.log("value:"+elementList[i].value)
+                             }
                 }
             }
 
         }
     },
 
+
+    toIframe: function() {
+
+        var elementList = document.querySelector(".link");
+        elementList.addEventListener("change", select, false);
+
+        function select(e) {
+            e.preventDefault();
+            var target = e.target.value;
+            var frame = document.querySelector("iframe");
+            frame.setAttribute("src", target);
+
+        }
+
+    },
+
     initEvent: function () {
         UTILS.addEvent(document.querySelector('#saveBtn'),'click', this.toLocalStorage);
         UTILS.addEvent(document.querySelector('#saveBtn'),'click', this.fromLocalStorage);
         UTILS.addEvent(document.querySelector('#clearBtn'),'click', this.clearLocalStorage);
+      //  UTILS.addEvent(document.querySelector('.link'),'change', this.toIframe);
+
     }
 
 };
