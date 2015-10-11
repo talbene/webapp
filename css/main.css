@@ -551,6 +551,7 @@ ul {
     height: 2.5em;
     position: absolute;
     right: 60px;
+    z-index: 1;
 }
 
 
@@ -646,7 +647,7 @@ fieldset .urlLabel {
 }
 
 
-#clearBtn, #saveBtn{
+.clearBtn, .saveBtn{
      font-size: 0.8em;
      background:none;
      outline: 0;
@@ -657,15 +658,15 @@ fieldset .urlLabel {
      height: 2.5em;
  }
 
-#saveBtn{
+.saveBtn{
     color: #ffffff;
     background-color: #000;
     text-decoration: none;
 }
-#saveBtn:focus, #clearBtn:focus {
+.saveBtn:focus, .clearBtn:focus, .btnExpand:focus, .btnSetting:focus {
     box-shadow: 0 0 5px #1B71D0;
     padding: 3px 0px 3px 3px;
-    border: 1px solid #1B71D0;
+    border: 2px solid #1B71D0;
 }
 .selectStyle{
     padding: 0;
