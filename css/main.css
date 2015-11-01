@@ -280,10 +280,11 @@ a:link, a:hover, a:active {
 
 /*header---------------->*/
 
-body {
-    background: url("../img/body-background.jpg") top center no-repeat;
+html {
+    background: url("../img/body-background.jpg") center center no-repeat fixed;
     background-size:  cover;
     margin:0;
+   
 
 }
 
